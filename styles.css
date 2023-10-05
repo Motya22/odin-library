@@ -354,3 +354,53 @@ template {
 * {
   box-sizing: border-box;
 }
+
+/* MODAL */
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease 0s;
+}
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+.modal__overlay,
+.modal__window {
+  z-index: 1000;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__window {
+  width: 600px;
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 30vh auto;
+}
+
+.modal__header {
+  padding: 5px 10px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eee;
+}
+
+.modal__close {
+}
+.modal__close:hover {
+  cursor: pointer;
+}
+
+.modal__body {
+  padding: 10px;
+}

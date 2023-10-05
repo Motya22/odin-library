@@ -12,7 +12,83 @@
       <h1 class="header__logo">ML</h1>
     </header>
     <main class="main">
+      <button type="button" class="btn" id="add-book-btn">NEW BOOK</button>
       <div class="books"></div>
     </main>
+
+    <div class="modal" id="add-book-modal">
+      <div class="modal__overlay">
+        <div class="modal__window">
+          <div class="modal__header">
+            <span class="modal__close"> &times; </span>
+          </div>
+          <div class="modal__body">
+            <form action="" method="post" id="add-book-form" class="form">
+              <h3 class="form__title">Add new book</h3>
+              <div class="form__row">
+                <label for="book-title"
+                  >Book Title<strong
+                    ><span aria-label="required">*</span></strong
+                  ></label
+                >
+                <input
+                  type="text"
+                  name="book-title"
+                  id="book-title"
+                  placeholder="The Hobbit"
+                  size="30"
+                  maxlength="245"
+                  required
+                />
+                <span></span>
+              </div>
+              <div class="form__row">
+                <label for="book_author"
+                  >Book Author<strong
+                    ><span aria-label="required">*</span></strong
+                  ></label
+                >
+                <input
+                  type="text"
+                  name="book-author"
+                  id="book-author"
+                  placeholder="John Ronald Reuel Tolkien"
+                  pattern="^[^0-9]+$"
+                  title="Please enter a author name consisting of letters only."
+                  size="30"
+                  maxlength="245"
+                  required
+                />
+                <span></span>
+              </div>
+              <div class="form__row">
+                <label for="book_pages"
+                  >Book Pages<strong
+                    ><span aria-label="required">*</span></strong
+                  ></label
+                >
+                <input
+                  type="number"
+                  name="book-pages"
+                  id="book-pages"
+                  placeholder="245"
+                  size="30"
+                  min="1"
+                  required
+                />
+                <span></span>
+              </div>
+              <div class="form__row">
+                <label for="book_read">Have you read the book yet?</label>
+                <input type="checkbox" name="book-read" id="book-read" />
+              </div>
+              <button type="submit" id="submit-book-btn" value="default">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

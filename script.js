@@ -1,3 +1,10 @@
+const booksEl = document.querySelector('.books');
+const addBookForm = document.querySelector('#add-book-form');
+const addBookModal = document.querySelector('#add-book-modal');
+const addBookBtn = document.querySelector('#add-book-btn');
+const modalCloseBtn = document.querySelector('.modal__close');
+const modalOverlay = document.querySelector('.modal__overlay');
+
 const myLibrary = [
   {
     title: 'The Hobbit',
@@ -12,6 +19,16 @@ const myLibrary = [
     read: true,
   },
 ];
+
+function addBookToLibrary() {
+  const title = addBookForm.querySelector('#book-title').value;
+  const author = addBookForm.querySelector('#book-author').value;
+  const pages = addBookForm.querySelector('#book-pages').value;
+  const read = addBookForm.querySelector('#book-read').checked;
+  const newBook = new Book(title, author, pages, read);
+
+  myLibrary.push(newBook);
+}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -50,5 +67,31 @@ function renderLibrary() {
     );
   });
 }
+
+// ADD BOOK MODAL
+addBookBtn.addEventListener('click', () => {
+  addBookModal.classList.add('active');
+});
+
+modalCloseBtn.addEventListener('click', () => {
+  addBookModal.classList.remove('active');
+  addBookForm.reset();
+});
+
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) {
+    addBookModal.classList.remove('active');
+    addBookForm.reset();
+  }
+});
+
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  addBookToLibrary();
+  addBookModal.classList.remove('active');
+  renderLibrary();
+  addBookForm.reset();
+});
 
 renderLibrary();
