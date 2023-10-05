@@ -30,6 +30,12 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
+function removeBook(dataId) {
+  const bookIndex = dataId - 1;
+
+  myLibrary.splice(bookIndex, 1);
+}
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -46,11 +52,11 @@ Book.prototype.info = function () {
 function renderLibrary() {
   booksEl.innerHTML = '';
 
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, i) => {
     booksEl.insertAdjacentHTML(
       'beforeend',
       `
-        <article class="book">
+        <article class="book" data-id="${i + 1}">
           <header class="book__header">
             <div>${book.pages} pages</div>
             <div>${book.author}</div>
@@ -60,7 +66,7 @@ function renderLibrary() {
             <button type="button" class="btn">${
               book.read ? 'Already read' : 'Not read yet'
             }</button>
-            <button type="button" class="btn">Remove</button>
+            <button type="button" class="btn" data-remove-book>Remove</button>
           </footer>
         </article>
       `
@@ -92,6 +98,18 @@ addBookForm.addEventListener('submit', (e) => {
   addBookModal.classList.remove('active');
   renderLibrary();
   addBookForm.reset();
+});
+
+booksEl.addEventListener('click', (e) => {
+  const target = e.target;
+
+  if (target.hasAttribute('data-remove-book')) {
+    const currentBook = target.closest('.book');
+    const dataId = currentBook.dataset.id;
+
+    removeBook(dataId);
+    renderLibrary();
+  }
 });
 
 renderLibrary();
