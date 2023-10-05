@@ -1,3 +1,18 @@
+const myLibrary = [
+  {
+    title: 'The Hobbit',
+    author: 'John Ronald Reuel Tolkien',
+    pages: 295,
+    read: false,
+  },
+  {
+    title: 'Digital Fortress',
+    author: 'Dan Brown',
+    pages: 448,
+    read: true,
+  },
+];
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
