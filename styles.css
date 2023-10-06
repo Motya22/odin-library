@@ -366,6 +366,8 @@ template {
   --bg-color: #cbd5e1;
   --white-color: #f8fafc;
   --slate-color: #64748b;
+  --blue-border-color: blue;
+  --error-color: #bf0303;
 }
 
 * {
@@ -484,8 +486,9 @@ body {
 }
 
 .modal__window {
-  width: 600px;
+  width: 290px;
   border-radius: 5px;
+  overflow: hidden;
   background-color: #fff;
   margin: 30vh auto;
 }
@@ -498,11 +501,102 @@ body {
 }
 
 .modal__close {
+  font-size: 20px;
+  font-weight: 700;
 }
 .modal__close:hover {
   cursor: pointer;
 }
 
 .modal__body {
+  background-color: var(--bg-color);
   padding: 10px;
+}
+
+/* FORM */
+.form {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.form__title {
+  flex: 0 0 100%;
+  text-align: center;
+}
+.form__row {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+.form__row:last-of-type {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.form__row label {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.form .btn {
+  flex: 0 0 100%;
+}
+
+input {
+  border: 1px solid var(--bg-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: 500;
+}
+
+input + span {
+  position: relative;
+}
+input + span::before {
+  position: absolute;
+  right: -25px;
+  top: -25px;
+}
+.password + span::after {
+  content: '* Passwords do not match';
+  font-size: 14px;
+  color: var(--error-color);
+  opacity: 0;
+  transition: opacity 0.3s ease 0s;
+}
+.password.error + span::after {
+  opacity: 1;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue-border-color);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+input:not(:focus):invalid {
+  border-color: var(--error-color);
+}
+
+input:not(:focus):valid {
+  border-color: green;
+}
+
+input:invalid + span::before {
+  content: '✖';
+  color: var(--error-color);
+}
+input:valid + span::before {
+  content: '✓';
+  color: green;
+}
+
+input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  accent-color: white;
+}
+input[type='checkbox']:hover {
+  cursor: pointer;
 }
