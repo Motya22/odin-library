@@ -63,7 +63,9 @@ function renderLibrary() {
     booksEl.insertAdjacentHTML(
       'beforeend',
       `
-        <article class="book" data-book-id="${i + 1}">
+        <article class="book ${
+          book.read ? 'already-read' : 'not-read'
+        }" data-book-id="${i + 1}">
           <header class="book__header">
             <div>${book.pages} pages</div>
             <div>${book.author}</div>
