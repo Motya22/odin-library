@@ -30,10 +30,17 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
-function removeBook(dataId) {
-  const bookIndex = dataId - 1;
+function removeBook(dataBookId) {
+  const bookIndex = dataBookId - 1;
 
   myLibrary.splice(bookIndex, 1);
+}
+
+function toggleBookStatus(dataBookId) {
+  const bookIndex = dataBookId - 1;
+  const currentBook = myLibrary[bookIndex];
+
+  currentBook.read = !currentBook.read;
 }
 
 function Book(title, author, pages, read) {
@@ -56,14 +63,14 @@ function renderLibrary() {
     booksEl.insertAdjacentHTML(
       'beforeend',
       `
-        <article class="book" data-id="${i + 1}">
+        <article class="book" data-book-id="${i + 1}">
           <header class="book__header">
             <div>${book.pages} pages</div>
             <div>${book.author}</div>
           </header>
           <h2 class="book__title">${book.title}</h2>
           <footer class="book__footer">
-            <button type="button" class="btn">${
+            <button type="button" class="btn" data-toggle-book-status>${
               book.read ? 'Already read' : 'Not read yet'
             }</button>
             <button type="button" class="btn" data-remove-book>Remove</button>
@@ -105,9 +112,16 @@ booksEl.addEventListener('click', (e) => {
 
   if (target.hasAttribute('data-remove-book')) {
     const currentBook = target.closest('.book');
-    const dataId = currentBook.dataset.id;
+    const dataBookId = currentBook.dataset.bookId;
 
-    removeBook(dataId);
+    removeBook(dataBookId);
+    renderLibrary();
+  }
+  if (target.hasAttribute('data-toggle-book-status')) {
+    const currentBook = target.closest('.book');
+    const dataBookId = currentBook.dataset.bookId;
+
+    toggleBookStatus(dataBookId);
     renderLibrary();
   }
 });
